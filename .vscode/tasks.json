@@ -2,13 +2,53 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Run Jekyll Server",
+      "label": "Start Jekyll Server Windows",
       "type": "shell",
-      "command": "./tools/run.sh",
+      "command": "bundle exec jekyll serve   --livereload",
       "group": {
         "kind": "build",
         "isDefault": true
       },
+      "detail": "Starts the Jekyll server with live reload."
+    },
+    {
+      "label": "build plugin",
+      "type": "shell",
+      "command": "bundle exec jekyll build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "build plugins."
+    },
+    {
+      "label": "Open Simple Browser for Jekyll",
+      "dependsOn": ["Open Simple Browser", "Move Simple Browser to Right"],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "detail": "Opens VS Code's Simple Browser, then moves it to the right editor group."
+    },
+    {
+      "label": "Test Site",
+      "type": "shell",
+      "command": [
+        "bundle exec htmlproofer _site",
+        "--disable-external",
+        "--ignore-urls '/^http://127.0.0.1/,/^http://0.0.0.0/,/^http://localhost/'"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run Jekyll Server",
+      "type": "shell",
+      "command": "./tools/run.sh",
+      "group": "build",
       "problemMatcher": [],
       "detail": "Runs the Jekyll server with live reload."
     },
@@ -17,7 +57,8 @@
       "type": "shell",
       "command": "./tools/test.sh",
       "group": {
-        "kind": "build"
+        "kind": "build",
+        "isDefault": true
       },
       "problemMatcher": [],
       "detail": "Build the Jekyll site for production."
@@ -59,6 +100,27 @@
         "kind": "build"
       },
       "detail": "Runs both the Jekyll server with live reload and build JS files in watch mode."
+    },
+    {
+      "label": "Open Simple Browser",
+      "command": "${input:openSimpleBrowser}"
+    },
+    {
+      "label": "Move Simple Browser to Right",
+      "command": "${input:moveSimpleBrowserRight}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "openSimpleBrowser",
+      "type": "command",
+      "command": "simpleBrowser.show",
+      "args": ["http://localhost:4000"]
+    },
+    {
+      "id": "moveSimpleBrowserRight",
+      "type": "command",
+      "command": "workbench.action.moveEditorToRightGroup"
     }
   ]
 }
