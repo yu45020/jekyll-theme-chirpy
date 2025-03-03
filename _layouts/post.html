@@ -111,7 +111,10 @@ script_includes:
       </button>
     </div>
 
-    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+    <button
+      id="toc-solo-trigger"
+      type="button"
+      class="toc-trigger btn btn-outline-secondary btn-sm">
       <span class="label ps-2 pe-1">{{- site.data.locales[lang].panel.toc -}}</span>
       <i class="fa-solid fa-angle-right fa-fw"></i>
     </button>
@@ -119,7 +122,10 @@ script_includes:
     <dialog id="toc-popup" class="p-0">
       <div class="header d-flex flex-row align-items-center justify-content-between">
         <div class="label text-truncate py-2 ms-4">{{- page.title -}}</div>
-        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+        <button
+          id="toc-popup-close"
+          type="button"
+          class="btn mx-1 my-1 opacity-75">
           <i class="fas fa-close"></i>
         </button>
       </div>
@@ -148,10 +154,7 @@ script_includes:
       <div class="post-tags">
         <i class="fa fa-tags fa-fw me-1"></i>
         {% for tag in page.tags %}
-          <a
-            href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
-            class="post-tag no-text-decoration"
-          >
+          <a href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/" class="post-tag no-text-decoration">
             {{- tag -}}
           </a>
         {% endfor %}
